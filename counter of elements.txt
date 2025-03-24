@@ -1,0 +1,66 @@
+
+#include <ctime>
+#include <cmath>
+#include <stdlib.h>
+#include <stdio.h>
+#include <iostream>
+
+using namespace std;
+struct counter { int elements, amount; };
+const int N = 10000;
+bool checkExists(int arr[N], int elem) {
+    bool el_exists = 0;
+    for (int i = 0; i<N; i++) {
+        if (arr[i] == elem) {
+            el_exists = 1;
+            break;
+        }
+    } 
+    return el_exists;
+}
+
+int eleCount(int arr[N], int elem) {
+    int count = 0;
+    for (int i = 0; i<N; i++) {
+        if (arr[i] == elem) {
+            count++;
+        }
+    }
+    return count;
+}
+
+int main()
+{
+    srand(time(0));
+    int mass[N];
+    int s = -100;
+    int e = 100;
+    int sum = 0;
+    int elems[200];
+    int j = 0;
+    for(int i = 0; i<N; i++)
+    {
+        mass[i] = rand()%(e-s+1)+s;
+    }
+    
+    for (int i = -100; i<101; i++) { 
+        if (checkExists(mass, i) == 1) {
+            elems[j] = i;
+            j++;
+        }
+    }
+     for (int i = 0; i<j; i++) {
+        counter i;
+        i.elements = elems[i];
+        i.amount = eleCount(mass, elems[i]));
+    }
+    for (int i = 0; i<j; i++) {
+        printf(" Количество элементов %d в массиве - %d\n", elems[i], eleCount(mass, elems[i]));
+    }
+
+    for (int i = 0; i<N; i++) {
+        sum += mass[i];
+    }
+    float avg = ((float)sum/N);
+    printf("Среднее арифметическое: %d/%d = %f", sum, N, avg);
+}
